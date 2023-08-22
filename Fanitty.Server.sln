@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanitty.Server.API", "src\Fanitty.Server.API\Fanitty.Server.API.csproj", "{1E91E529-3349-4B2A-8462-3E6CCE3EE840}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F8F3F160-8CC1-4C4F-BCBA-0A38673BFD96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E91E529-3349-4B2A-8462-3E6CCE3EE840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E91E529-3349-4B2A-8462-3E6CCE3EE840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E91E529-3349-4B2A-8462-3E6CCE3EE840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E91E529-3349-4B2A-8462-3E6CCE3EE840}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E91E529-3349-4B2A-8462-3E6CCE3EE840} = {F8F3F160-8CC1-4C4F-BCBA-0A38673BFD96}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CE49281-2E88-46A2-8794-891D9E6B28B0}
+	EndGlobalSection
+EndGlobal
