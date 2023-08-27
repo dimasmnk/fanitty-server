@@ -1,11 +1,12 @@
-﻿using Fanitty.Server.Infrastructure.Extensions;
+﻿using Fanitty.Server.Core.Interfaces.Persistence;
+using Fanitty.Server.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Fanitty.Server.Infrastructure.Persistence;
 
-public class FanittyDbContext : DbContext
+public class FanittyDbContext : DbContext, IFanittyDbContext
 {
     private readonly IMediator _mediator;
 
