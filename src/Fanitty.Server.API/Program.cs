@@ -1,4 +1,5 @@
-using Fanitty.Server.API.Endpoints.Users;
+using Fanitty.Server.API.Endpoints;
+using Fanitty.Server.API.Extensions.Authentication;
 using Fanitty.Server.API.Services;
 using Fanitty.Server.Application;
 using Fanitty.Server.Application.Interfaces;
@@ -9,8 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.AddFirebaseAuthentication();
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapUserEndpoints();
+
 app.Run();

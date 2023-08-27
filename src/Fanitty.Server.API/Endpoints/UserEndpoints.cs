@@ -1,7 +1,7 @@
 ﻿using Fanitty.Server.Application.Users.Commands.CreateUser;
 using MediatR;
 
-namespace Fanitty.Server.API.Endpoints.Users;
+namespace Fanitty.Server.API.Endpoints;
 
 public static class UserEndpoints
 {
