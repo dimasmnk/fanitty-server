@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Fanitty.Server.Core\Fanitty.Server.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Constants\" />
+  </ItemGroup>
+
 </Project>
