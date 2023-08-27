@@ -2,10 +2,8 @@
 
 namespace Fanitty.Server.Core.Common;
 
-public abstract class BaseEntity<T> where T : struct
+public abstract class BaseEntity
 {
-    public T Id { get; set; }
-
     private readonly List<BaseEvent> _domainEvents = new();
 
     [NotMapped]
