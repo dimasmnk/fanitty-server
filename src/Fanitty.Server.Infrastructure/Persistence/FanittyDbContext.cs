@@ -1,4 +1,5 @@
-﻿using Fanitty.Server.Core.Interfaces.Persistence;
+﻿using Fanitty.Server.Core.Entities;
+using Fanitty.Server.Core.Interfaces.Persistence;
 using Fanitty.Server.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ namespace Fanitty.Server.Infrastructure.Persistence;
 public class FanittyDbContext : DbContext, IFanittyDbContext
 {
     private readonly IMediator _mediator;
+
+    public DbSet<User> Users => Set<User>();
 
     public FanittyDbContext(DbContextOptions<FanittyDbContext> options, IMediator mediator) : base(options)
     {

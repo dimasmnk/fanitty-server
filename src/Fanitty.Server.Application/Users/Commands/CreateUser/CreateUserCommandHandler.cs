@@ -18,7 +18,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User("asdf", "Test", "semenkodima97@gmail.com");
+        var user = new User(request.Uuid, request.Username, request.Email);
         _userRepository.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
     }

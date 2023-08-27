@@ -20,7 +20,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.DisplayName).HasMaxLength(UserSettings.DisplayNameMaxLength);
         builder.Property(x => x.DisplayName).IsRequired();
 
-        builder.Property(x => x.Email).IsRequired();
-        builder.OwnsOne(x => x.Email);
+        builder.OwnsOne(x => x.Email, email =>
+        {
+            email.WithOwner();
+
+            email.Property(x => x.Value).IsRequired();
+        }).Navigation(x => x.Email).IsRequired();
     }
 }
