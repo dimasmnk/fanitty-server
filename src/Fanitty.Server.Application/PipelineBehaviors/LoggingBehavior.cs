@@ -32,16 +32,18 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         var elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
         var requestName = typeof(TRequest).Name;
-        var userId = _currentUserService.UserId;
+        var userId = _currentUserService.UserId.HasValue
+            ? _currentUserService.UserId.ToString()
+            : _currentUserService.Uid;
 
         if (elapsedMilliseconds < 500)
         {
-            _logger.LogInformation("Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
+            _logger.LogInformation("Request: {Name} {ElapsedMilliseconds} {@UserId} {@Request}",
                 requestName, elapsedMilliseconds, userId, request);
         }
         else
         {
-            _logger.LogWarning("Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
+            _logger.LogWarning("Request: {Name} {ElapsedMilliseconds} {@UserId} {@Request}",
                 requestName, elapsedMilliseconds, userId, request);
         }
 

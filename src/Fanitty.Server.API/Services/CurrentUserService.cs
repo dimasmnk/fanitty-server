@@ -10,7 +10,7 @@ public class CurrentUserService : ICurrentUserService
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         => _httpContextAccessor = httpContextAccessor;
 
-    public int UserId
+    public int? UserId
     {
         get
         {
@@ -18,9 +18,11 @@ public class CurrentUserService : ICurrentUserService
                 .HttpContext?
                 .User
                 .Claims
-                .First(x => x.Type == Constants.UserIdClaimName).Value;
+                .FirstOrDefault(x => x.Type == Constants.UserIdClaimName)?.Value;
 
-            return int.Parse(claim!);
+            return claim is null
+                ? null
+                : int.Parse(claim);
         }
     }
 
