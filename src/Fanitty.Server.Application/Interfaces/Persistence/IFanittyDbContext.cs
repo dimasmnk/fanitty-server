@@ -1,4 +1,4 @@
-﻿namespace Fanitty.Server.Core.Interfaces.Persistence;
+﻿namespace Fanitty.Server.Application.Interfaces.Persistence;
 
 public interface IFanittyDbContext
 {

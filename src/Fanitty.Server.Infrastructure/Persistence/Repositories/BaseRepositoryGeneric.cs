@@ -1,5 +1,5 @@
-﻿using Fanitty.Server.Core.Common;
-using Fanitty.Server.Core.Interfaces.Persistence.IRepositories;
+﻿using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
+using Fanitty.Server.Core.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fanitty.Server.Infrastructure.Persistence.Repositories;

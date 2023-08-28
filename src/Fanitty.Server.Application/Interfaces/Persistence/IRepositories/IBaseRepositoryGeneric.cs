@@ -1,6 +1,6 @@
 ﻿using Fanitty.Server.Core.Common;
 
-namespace Fanitty.Server.Core.Interfaces.Persistence.IRepositories;
+namespace Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
 
 public interface IBaseRepositoryGeneric<TEntity> : IDisposable where TEntity : BaseEntity
 {

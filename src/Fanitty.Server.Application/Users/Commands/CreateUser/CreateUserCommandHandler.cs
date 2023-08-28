@@ -1,6 +1,6 @@
-﻿using Fanitty.Server.Core.Entities;
-using Fanitty.Server.Core.Interfaces.Persistence;
-using Fanitty.Server.Core.Interfaces.Persistence.IRepositories;
+﻿using Fanitty.Server.Application.Interfaces.Persistence;
+using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
+using Fanitty.Server.Core.Entities;
 using MediatR;
 
 namespace Fanitty.Server.Application.Users.Commands.CreateUser;

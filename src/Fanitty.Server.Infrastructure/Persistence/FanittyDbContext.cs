@@ -1,5 +1,5 @@
-﻿using Fanitty.Server.Core.Entities;
-using Fanitty.Server.Core.Interfaces.Persistence;
+﻿using Fanitty.Server.Application.Interfaces.Persistence;
+using Fanitty.Server.Core.Entities;
 using Fanitty.Server.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
