@@ -10,8 +10,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(x => x.Id);
 
-        builder.HasIndex(x => x.Uuid).IsUnique();
-        builder.Property(x => x.Uuid).IsRequired();
+        builder.HasIndex(x => x.Uid).IsUnique();
+        builder.Property(x => x.Uid).IsRequired();
 
         builder.HasIndex(x => x.Username).IsUnique();
         builder.Property(x => x.Username).IsRequired();

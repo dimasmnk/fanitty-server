@@ -37,21 +37,21 @@ namespace Fanitty.Server.Infrastructure.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<string>("Uid")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("character varying(40)");
 
-                    b.Property<string>("Uuid")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Username")
+                    b.HasIndex("Uid")
                         .IsUnique();
 
-                    b.HasIndex("Uuid")
+                    b.HasIndex("Username")
                         .IsUnique();
 
                     b.ToTable("Users");

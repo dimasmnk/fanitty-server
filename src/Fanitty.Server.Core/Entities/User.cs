@@ -8,7 +8,7 @@ namespace Fanitty.Server.Core.Entities;
 public class User : BaseEntity
 {
     public long Id { get; private set; }
-    public string? Uuid { get; private set; }
+    public string? Uid { get; private set; }
     public string? Username { get; private set; }
     public string? DisplayName { get; private set; }
     public Email? Email { get; private set; }
@@ -16,18 +16,18 @@ public class User : BaseEntity
 
     public User() { }
 
-    public User(string uuid, string username, string email)
+    public User(string uid, string username, string email)
     {
-        Uuid = uuid;
+        Uid = uid;
         UserValidatorPool.UsernameValidator.ValidateAndThrow(username);
         Username = username;
         DisplayName = username;
         Email = new Email(email);
     }
 
-    public void UpdateUuid(string uuid)
+    public void UpdateUuid(string uid)
     {
-        Uuid = uuid;
+        Uid = uid;
     }
 
     public void UpdateUsername(string username)

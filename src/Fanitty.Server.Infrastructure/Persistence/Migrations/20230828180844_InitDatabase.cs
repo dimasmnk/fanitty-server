@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fanitty.Server.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Fanitty.Server.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Uuid = table.Column<string>(type: "text", nullable: false),
+                    Uid = table.Column<string>(type: "text", nullable: false),
                     Username = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
                     DisplayName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Email_Value = table.Column<string>(type: "text", nullable: false),
@@ -29,15 +29,15 @@ namespace Fanitty.Server.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Username",
+                name: "IX_Users_Uid",
                 table: "Users",
-                column: "Username",
+                column: "Uid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_Uuid",
+                name: "IX_Users_Username",
                 table: "Users",
-                column: "Uuid",
+                column: "Username",
                 unique: true);
         }
 
