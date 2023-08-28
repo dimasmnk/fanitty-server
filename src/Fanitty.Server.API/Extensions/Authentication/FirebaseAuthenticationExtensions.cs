@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Fanitty.Server.Infrastructure.Services.Firebase;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Fanitty.Server.API.Extensions.Authentication;
 
@@ -6,7 +7,7 @@ public static class FirebaseAuthenticationExtensions
 {
     public static void AddFirebaseAuthentication(this WebApplicationBuilder builder)
     {
-        var audience = builder.Configuration.GetValue<string>("FirebaseProjectId");
+        var audience = builder.Configuration.GetValue<string>(Constants.FirebaseProjectIdSectionName);
         builder.Services.AddAuthentication(o =>
         {
             o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

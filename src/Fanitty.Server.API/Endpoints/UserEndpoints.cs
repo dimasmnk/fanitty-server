@@ -7,7 +7,7 @@ public static class UserEndpoints
 {
     public static void MapUserEndpoints(this WebApplication app)
     {
-        var userEndpoints = app.MapGroup("/users");
+        var userEndpoints = app.MapGroup("/users").RequireAuthorization();
 
         userEndpoints.MapPost("/",
             async (CreateUserCommand command, IMediator mediator, CancellationToken cancellationToken)

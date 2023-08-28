@@ -1,7 +1,9 @@
-﻿using Fanitty.Server.Application.Interfaces.Persistence;
+﻿using Fanitty.Server.Application.Interfaces;
+using Fanitty.Server.Application.Interfaces.Persistence;
 using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
 using Fanitty.Server.Infrastructure.Persistence;
 using Fanitty.Server.Infrastructure.Persistence.Repositories;
+using Fanitty.Server.Infrastructure.Services.Firebase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,7 @@ public static class ConfigureServices
         services.AddScoped<IFanittyDbContext>(provider => provider.GetRequiredService<FanittyDbContext>());
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddSingleton<IFirebaseService, FirebaseService>();
 
         return services;
     }
