@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Fanitty.Server.Application.Users.Commands.CreateUser;
+namespace Fanitty.Server.Application.Handlers.Users.Commands.CreateUser;
 
 public class CreateUserCommand : IRequest
 {

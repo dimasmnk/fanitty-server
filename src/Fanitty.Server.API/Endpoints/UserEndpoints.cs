@@ -1,4 +1,4 @@
-﻿using Fanitty.Server.Application.Users.Commands.CreateUser;
+﻿using Fanitty.Server.Application.Handlers.Users.Commands.CreateUser;
 using MediatR;
 
 namespace Fanitty.Server.API.Endpoints;
