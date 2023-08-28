@@ -8,10 +8,10 @@ namespace Fanitty.Server.Core.Entities;
 public class User : BaseEntity
 {
     public long Id { get; private set; }
-    public string? Uid { get; private set; }
-    public string? Username { get; private set; }
-    public string? DisplayName { get; private set; }
-    public Email? Email { get; private set; }
+    public string Uid { get; private set; } = string.Empty;
+    public string Username { get; private set; } = string.Empty;
+    public string DisplayName { get; private set; } = string.Empty;
+    public Email Email { get; private set; } = Email.Empty;
     public string? Bio { get; private set; }
 
     public User() { }
