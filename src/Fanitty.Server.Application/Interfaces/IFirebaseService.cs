@@ -1,5 +1,6 @@
 ﻿namespace Fanitty.Server.Application.Interfaces;
 public interface IFirebaseService
 {
-    Task SetUserIdClaim(string uid, long userId);
+    Task SetUserIdClaimAsync(string uid, long userId);
+    Task<string> GetUserEmailByUidAsync(string uid);
 }

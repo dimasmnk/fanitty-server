@@ -13,17 +13,16 @@ public class FirebaseService : IFirebaseService
 
     public FirebaseService(IConfiguration configuration)
     {
-        var projectId = configuration.GetValue<string>(Constants.FirebaseProjectIdSectionName);
+        var path = configuration.GetValue<string>("Firebase:CredentialsFilePath");
         App = FirebaseApp.Create(new AppOptions()
         {
-            Credential = GoogleCredential.GetApplicationDefault(),
-            ProjectId = projectId,
+            Credential = GoogleCredential.FromFile(path)
         });
 
         Auth = FirebaseAuth.DefaultInstance;
     }
 
-    public async Task SetUserIdClaim(string uid, long userId)
+    public async Task SetUserIdClaimAsync(string uid, long userId)
     {
         var user = await Auth.GetUserAsync(uid);
         var customClaims = user.CustomClaims;
@@ -34,5 +33,16 @@ public class FirebaseService : IFirebaseService
         };
 
         await Auth.SetCustomUserClaimsAsync(uid, claims);
+    }
+
+    public async Task<string> GetUserEmailByUidAsync(string uid)
+    {
+        if (string.IsNullOrEmpty(uid))
+        {
+            throw new ArgumentException($"'{nameof(uid)}' cannot be null or empty.", nameof(uid));
+        }
+
+        var user = await Auth.GetUserAsync(uid);
+        return user.Email;
     }
 }
