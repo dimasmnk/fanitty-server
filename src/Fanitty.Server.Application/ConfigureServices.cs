@@ -1,4 +1,6 @@
-﻿using Fanitty.Server.Application.PipelineBehaviors;
+﻿using Fanitty.Server.Application.Interfaces;
+using Fanitty.Server.Application.PipelineBehaviors;
+using Fanitty.Server.Application.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,8 @@ public static class ConfigureServices
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         });
+
+        services.AddSingleton<IUsernameGeneratorService, UsernameGeneratorService>();
 
         return services;
     }

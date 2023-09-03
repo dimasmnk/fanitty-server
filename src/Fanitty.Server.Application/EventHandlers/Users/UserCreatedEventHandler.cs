@@ -1,7 +1,7 @@
 ﻿using Fanitty.Server.Core.Events;
 using MediatR;
 
-namespace Fanitty.Server.Application.Handlers.Users.EventHandlers;
+namespace Fanitty.Server.Application.EventHandlers.Users;
 
 public class UserCreatedEventHandler : INotificationHandler<UserCreatedEvent>
 {

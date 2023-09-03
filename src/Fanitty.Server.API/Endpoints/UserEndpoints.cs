@@ -1,4 +1,5 @@
-﻿using Fanitty.Server.Application.Handlers.Users.Commands.CreateUser;
+﻿using Fanitty.Server.Application.Commands.Users;
+using Fanitty.Server.Application.Queries.Users;
 using MediatR;
 
 namespace Fanitty.Server.API.Endpoints;
@@ -12,5 +13,9 @@ public static class UserEndpoints
         userEndpoints.MapPost("/",
             async (CreateUserCommand command, IMediator mediator, CancellationToken cancellationToken)
             => await mediator.Send(command, cancellationToken));
+
+        userEndpoints.MapGet("/me",
+            async (IMediator mediator, CancellationToken cancellationToken)
+            => await mediator.Send(new GetCurrentUserQuery(), cancellationToken));
     }
 }

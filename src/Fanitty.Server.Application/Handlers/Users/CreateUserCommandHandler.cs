@@ -1,10 +1,12 @@
-﻿using Fanitty.Server.Application.Interfaces;
+﻿using Fanitty.Server.Application.Commands.Users;
+using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Application.Interfaces.Persistence;
 using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
 using Fanitty.Server.Core.Entities;
+using Fanitty.Server.Core.Settings;
 using MediatR;
 
-namespace Fanitty.Server.Application.Handlers.Users.Commands.CreateUser;
+namespace Fanitty.Server.Application.Handlers.Users;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 {
@@ -12,21 +14,25 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     private readonly IUserRepository _userRepository;
     private readonly ICurrentUserService _currentUserService;
     private readonly IFirebaseService _firebaseService;
+    private readonly IUsernameGeneratorService _usernameGeneratorService;
 
-    public CreateUserCommandHandler(IFanittyDbContext context, IUserRepository userRepository, ICurrentUserService currentUserService, IFirebaseService firebaseService)
+    public CreateUserCommandHandler(IFanittyDbContext context, IUserRepository userRepository, ICurrentUserService currentUserService, IFirebaseService firebaseService, IUsernameGeneratorService usernameGeneratorService)
     {
         _context = context;
         _userRepository = userRepository;
         _currentUserService = currentUserService;
         _firebaseService = firebaseService;
+        _usernameGeneratorService = usernameGeneratorService;
     }
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var uid = _currentUserService.Uid;
-        var guid = Guid.NewGuid().ToString()[..7];
         var email = await _firebaseService.GetUserEmailByUidAsync(uid);
-        var user = new User(guid + uid, request.Username + guid, email + guid);
+        var username = request.IsGeneratedUsername
+            ? _usernameGeneratorService.GenerateUsernameFromEmail(email, 4, UserSettings.UsernameMaxLength)
+            : request.Username;
+        var user = new User(uid, username, email);
         _userRepository.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
         await _firebaseService.SetUserIdClaimAsync(uid, user.Id);

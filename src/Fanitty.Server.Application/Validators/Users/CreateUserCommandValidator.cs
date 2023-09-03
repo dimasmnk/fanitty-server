@@ -1,7 +1,8 @@
-﻿using Fanitty.Server.Core.Settings;
+﻿using Fanitty.Server.Application.Commands.Users;
+using Fanitty.Server.Core.Settings;
 using FluentValidation;
 
-namespace Fanitty.Server.Application.Handlers.Users.Commands.CreateUser;
+namespace Fanitty.Server.Application.Validators.Users;
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
     public CreateUserCommandValidator()
@@ -9,6 +10,7 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
         RuleFor(x => x.Username)
             .NotEmpty()
             .MinimumLength(UserSettings.UsernameMinLength)
-            .MaximumLength(UserSettings.UsernameMaxLength);
+            .MaximumLength(UserSettings.UsernameMaxLength)
+            .When(x => !x.IsGeneratedUsername);
     }
 }
