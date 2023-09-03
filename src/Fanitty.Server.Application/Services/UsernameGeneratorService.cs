@@ -27,8 +27,8 @@ public class UsernameGeneratorService : IUsernameGeneratorService
 
     private int GetRandomDigits(int randomDigitCount)
     {
-        var endRange = 10 * randomDigitCount;
-        var startRange = endRange - 10;
+        var startRange = Convert.ToInt32(Math.Pow(10, randomDigitCount - 1));
+        var endRange = Convert.ToInt32(Math.Pow(10, randomDigitCount));
         return _random.Next(startRange, endRange);
     }
 }
