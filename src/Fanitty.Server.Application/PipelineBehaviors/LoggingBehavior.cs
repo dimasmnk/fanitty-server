@@ -38,13 +38,13 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 
         if (elapsedMilliseconds < 500)
         {
-            _logger.LogInformation("Request: {Name} {ElapsedMilliseconds} {@UserId} {@Request}",
-                requestName, elapsedMilliseconds, userId, request);
+            _logger.LogInformation("[Request: {Name}] [Duration: {ElapsedMilliseconds}ms] [User: {@UserId}]\r\n",
+                requestName, elapsedMilliseconds, userId ?? "None");
         }
         else
         {
-            _logger.LogWarning("Request: {Name} {ElapsedMilliseconds} {@UserId} {@Request}",
-                requestName, elapsedMilliseconds, userId, request);
+            _logger.LogWarning("[Request: {Name}] [Duration: {ElapsedMilliseconds}ms] [User: {@UserId}]\r\n",
+                requestName, elapsedMilliseconds, userId ?? "None");
         }
 
         return response;
