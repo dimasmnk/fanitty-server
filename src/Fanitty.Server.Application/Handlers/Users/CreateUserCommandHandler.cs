@@ -27,7 +27,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var uid = _currentUserService.Uid;
+        var uid = _currentUserService.Uid ?? throw new NullReferenceException($"Uid cannot be null.");
         var email = await _firebaseService.GetUserEmailByUidAsync(uid);
         var username = request.IsGeneratedUsername
             ? _usernameGeneratorService.GenerateUsernameFromEmail(email, 4, UserSettings.UsernameMaxLength)

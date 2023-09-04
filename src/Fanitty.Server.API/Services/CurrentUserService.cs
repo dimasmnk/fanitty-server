@@ -26,15 +26,15 @@ public class CurrentUserService : ICurrentUserService
         }
     }
 
-    public string Uid
+    public string? Uid
     {
         get
         {
             var claim = _httpContextAccessor?
                 .HttpContext?
-                .User
-                .Claims
-                .First(x => x.Type == Constants.UidClaimName).Value;
+                .User?
+                .Claims?
+                .FirstOrDefault(x => x.Type == Constants.UidClaimName)?.Value;
 
             return claim!;
         }

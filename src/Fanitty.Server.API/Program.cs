@@ -1,6 +1,7 @@
 using Fanitty.Server.API.Endpoints;
 using Fanitty.Server.API.Extensions.Authentication;
 using Fanitty.Server.API.Extensions.Cors;
+using Fanitty.Server.API.Middlewares;
 using Fanitty.Server.API.Services;
 using Fanitty.Server.Application;
 using Fanitty.Server.Application.Interfaces;
@@ -22,6 +23,8 @@ app.UserAppCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<UnhandledExceptionMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
 app.MapUserEndpoints();
 
 app.Run();

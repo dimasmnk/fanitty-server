@@ -3,5 +3,5 @@
 public interface ICurrentUserService
 {
     int? UserId { get; }
-    string Uid { get; }
+    string? Uid { get; }
 }
