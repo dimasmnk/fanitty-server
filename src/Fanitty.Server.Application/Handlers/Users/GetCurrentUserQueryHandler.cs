@@ -1,5 +1,6 @@
 ﻿using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
+using Fanitty.Server.Application.Mappers;
 using Fanitty.Server.Application.Queries.Users;
 using Fanitty.Server.Application.Responses.Users;
 using MediatR;
@@ -20,13 +21,6 @@ public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, C
     {
         var userId = _currentUserService.UserId ?? throw new NullReferenceException("User id parameter is null.");
         var user = await _userRepository.GetUserById(userId, cancellationToken) ?? throw new NullReferenceException($"User with id {userId} not found.");
-        return new CurrentUserResponse
-        {
-            Id = user.Id,
-            Username = user.Username,
-            DisplayName = user.DisplayName,
-            Email = user.Email.Value,
-            Bio = user.Bio
-        };
+        return user.MapToCurrentUserResponse();
     }
 }

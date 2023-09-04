@@ -17,7 +17,16 @@ public class CustomLogFormatter : ConsoleFormatter
         var message = logEntry.Formatter(logEntry.State, logEntry.Exception);
 
         var logLevelColor = GetAnsiColorCode(logLevel);
-        textWriter.WriteLine($"[{timestamp}] [{logLevelColor}{logLevel}{defaultColor}]: {message}");
+
+        if (logEntry.Exception is null)
+        {
+            textWriter.WriteLine($"[{timestamp}] [{logLevelColor}{logLevel}{defaultColor}]: {message}");
+        }
+        else
+        {
+            textWriter.WriteLine($"[{timestamp}] [{logLevelColor}{logLevel}{defaultColor}]: {logEntry.Exception.GetType().FullName} {logEntry.Exception.Message}");
+            textWriter.WriteLine($"StackTrace: {logEntry.Exception.StackTrace}");
+        }
     }
 
     private static string GetAnsiColorCode(LogLevel logLevel)
