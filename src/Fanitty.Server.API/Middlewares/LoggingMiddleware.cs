@@ -28,19 +28,19 @@ public class LoggingMiddleware
 
         var path = context.Request.Path;
         var code = context.Response.StatusCode;
-        var userId = currentUserService.UserId.HasValue
-            ? currentUserService.UserId.ToString()
-            : currentUserService.Uid;
+        var ip = context.Connection.RemoteIpAddress;
+        var method = context.Request.Method;
+        var uid = currentUserService.Uid ?? "None";
 
         if (elapsedMilliseconds < 500)
         {
-            _logger.LogInformation("[Request: {Name}] [Duration: {ElapsedMilliseconds}ms] [User: {@UserId}] [StatusCode: {@StatusCode}]\r\n",
-                path, elapsedMilliseconds, userId ?? "None", code);
+            _logger.LogInformation("Request {Method} for {Name} with code {StatusCode} from user {UserId} {Ip} with duration {ElapsedMilliseconds}ms",
+                method, path, code, uid, ip, elapsedMilliseconds);
         }
         else
         {
-            _logger.LogWarning("[Request: {Name}] [Duration: {ElapsedMilliseconds}ms] [User: {@UserId}] [StatusCode: {@StatusCode}]\r\n",
-                path, elapsedMilliseconds, userId ?? "None", code);
+            _logger.LogWarning("Request {Method} for {Name} with code {StatusCode} from user {UserId} {Ip} with duration {ElapsedMilliseconds}ms",
+                method, path, code, uid, ip, elapsedMilliseconds);
         }
 
         _timer.Reset();
