@@ -15,4 +15,15 @@ public static class UserMapperExtensions
             Bio = user.Bio
         };
     }
+
+    public static UserByUsernameResponse MapToUserByUsernameResponse(this User user)
+    {
+        return new UserByUsernameResponse
+        {
+            Id = user.Id,
+            Username = user.Username,
+            DisplayName = user.DisplayName,
+            Bio = user.Bio
+        };
+    }
 }

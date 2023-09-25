@@ -39,4 +39,16 @@ public class CurrentUserService : ICurrentUserService
             return claim!;
         }
     }
+
+    public int GetUserId()
+    {
+        if (UserId == null)
+        {
+            throw new NullReferenceException("User id is not set in user claims.");
+        }
+        else
+        {
+            return UserId.Value;
+        }
+    }
 }

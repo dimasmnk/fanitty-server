@@ -19,8 +19,8 @@ public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, C
 
     public async Task<CurrentUserResponse> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
     {
-        var userId = _currentUserService.UserId ?? throw new NullReferenceException("User id parameter is null.");
-        var user = await _userRepository.GetUserById(userId, cancellationToken) ?? throw new NullReferenceException($"User with id {userId} not found.");
+        var userId = _currentUserService.GetUserId();
+        var user = await _userRepository.GetUserByIdAsync(userId, cancellationToken);
         return user.MapToCurrentUserResponse();
     }
 }

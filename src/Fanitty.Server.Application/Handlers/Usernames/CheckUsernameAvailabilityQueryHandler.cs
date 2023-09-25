@@ -15,7 +15,7 @@ public class CheckUsernameAvailabilityQueryHandler : IRequestHandler<CheckUserna
 
     public async Task<CheckUsernameAvailabilityResponse> Handle(CheckUsernameAvailabilityQuery request, CancellationToken cancellationToken)
     {
-        var isAvailable = await _userRepository.IsUsernameAvailable(request.Username, cancellationToken);
+        var isAvailable = await _userRepository.IsUsernameAvailableAsync(request.Username, cancellationToken);
         var response = new CheckUsernameAvailabilityResponse
         {
             IsAvailable = isAvailable

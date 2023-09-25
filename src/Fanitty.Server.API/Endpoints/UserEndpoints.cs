@@ -17,5 +17,9 @@ public static class UserEndpoints
         userEndpoints.MapGet("/me",
             async (IMediator mediator, CancellationToken cancellationToken)
             => await mediator.Send(new GetCurrentUserQuery(), cancellationToken));
+
+        userEndpoints.MapGet("/{username}",
+            async (string username, IMediator mediator, CancellationToken cancellationToken)
+            => await mediator.Send(new GetUserByUsernameQuery(username), cancellationToken));
     }
 }
