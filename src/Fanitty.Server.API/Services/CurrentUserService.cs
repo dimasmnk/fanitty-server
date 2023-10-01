@@ -10,7 +10,7 @@ public class CurrentUserService : ICurrentUserService
     public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         => _httpContextAccessor = httpContextAccessor;
 
-    public int? UserId
+    public Guid? UserId
     {
         get
         {
@@ -22,7 +22,7 @@ public class CurrentUserService : ICurrentUserService
 
             return claim is null
                 ? null
-                : int.Parse(claim);
+                : Guid.Parse(claim);
         }
     }
 
@@ -40,7 +40,7 @@ public class CurrentUserService : ICurrentUserService
         }
     }
 
-    public int GetUserId()
+    public Guid GetUserId()
     {
         if (UserId == null)
         {

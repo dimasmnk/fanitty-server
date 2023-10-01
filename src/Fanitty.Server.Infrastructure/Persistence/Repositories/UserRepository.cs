@@ -8,7 +8,7 @@ public class UserRepository : BaseRepositoryGeneric<User>, IUserRepository
 {
     public UserRepository(FanittyDbContext context) : base(context) { }
 
-    public async Task<User> GetUserByIdAsync(long id, CancellationToken cancellationToken)
+    public async Task<User> GetUserByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await entity.FindAsync(new object[] { id }, cancellationToken);
         return user ?? throw new UserNotFoundException($"User with id {id} not found.");

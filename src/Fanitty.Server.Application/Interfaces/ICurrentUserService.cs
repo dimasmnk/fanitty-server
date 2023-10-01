@@ -2,7 +2,7 @@
 
 public interface ICurrentUserService
 {
-    int? UserId { get; }
+    Guid? UserId { get; }
     string? Uid { get; }
-    int GetUserId();
+    Guid GetUserId();
 }

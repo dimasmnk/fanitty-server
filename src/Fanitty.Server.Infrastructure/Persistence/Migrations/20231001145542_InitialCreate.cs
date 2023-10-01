@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Fanitty.Server.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDatabase : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,8 +15,7 @@ namespace Fanitty.Server.Infrastructure.Persistence.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Uid = table.Column<string>(type: "text", nullable: false),
                     Username = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
                     DisplayName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),

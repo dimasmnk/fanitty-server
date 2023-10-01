@@ -22,7 +22,7 @@ public class FirebaseService : IFirebaseService
         Auth = FirebaseAuth.DefaultInstance;
     }
 
-    public async Task SetUserIdClaimAsync(string uid, long userId)
+    public async Task SetUserIdClaimAsync(string uid, Guid userId)
     {
         var user = await Auth.GetUserAsync(uid);
         var customClaims = user.CustomClaims;
