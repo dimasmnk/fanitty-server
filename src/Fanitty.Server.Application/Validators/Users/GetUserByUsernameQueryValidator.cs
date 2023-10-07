@@ -1,5 +1,5 @@
 ﻿using Fanitty.Server.Application.Queries.Users;
-using Fanitty.Server.Core.Settings;
+using Fanitty.Server.Application.Validators.Base;
 using FluentValidation;
 
 namespace Fanitty.Server.Application.Validators.Users;
@@ -8,9 +8,6 @@ public class GetUserByUsernameQueryValidator : AbstractValidator<GetUserByUserna
     public GetUserByUsernameQueryValidator()
     {
         RuleFor(x => x.Username)
-            .NotNull()
-            .NotEmpty()
-            .MinimumLength(UserSettings.UsernameMinLength)
-            .MaximumLength(UserSettings.UsernameMaxLength);
+            .Username();
     }
 }

@@ -14,6 +14,10 @@ public static class UserEndpoints
             async (CreateUserCommand command, IMediator mediator, CancellationToken cancellationToken)
             => await mediator.Send(command, cancellationToken));
 
+        userEndpoints.MapPut("/",
+            async (UpdateUserCommand command, IMediator mediator, CancellationToken cancellationToken)
+            => await mediator.Send(command, cancellationToken));
+
         userEndpoints.MapGet("/me",
             async (IMediator mediator, CancellationToken cancellationToken)
             => await mediator.Send(new GetCurrentUserQuery(), cancellationToken));

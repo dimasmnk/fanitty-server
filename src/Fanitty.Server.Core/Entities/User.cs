@@ -47,9 +47,11 @@ public class User : BaseEntity
         Email = email;
     }
 
-    public void UpdateBio(string bio)
+    public void UpdateBio(string? bio)
     {
-        UserValidatorPool.BioValidator.ValidateAndThrow(bio);
+        if (bio is not null)
+            UserValidatorPool.BioValidator.ValidateAndThrow(bio);
+
         Bio = bio;
     }
 }

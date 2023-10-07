@@ -1,0 +1,22 @@
+﻿using Fanitty.Server.Application.Commands.Users;
+using Fanitty.Server.Application.Validators.Base;
+using FluentValidation;
+
+namespace Fanitty.Server.Application.Validators.Users;
+public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
+{
+    public UpdateUserCommandValidator()
+    {
+        RuleFor(x => x.Username)
+            .Username()
+            .When(x => x.Username is not null);
+
+        RuleFor(x => x.DisplayName)
+            .DisplayName()
+            .When(x => x.Username is not null);
+
+        RuleFor(x => x.Bio)
+            .Bio()
+            .When(x => x.Bio is not null);
+    }
+}

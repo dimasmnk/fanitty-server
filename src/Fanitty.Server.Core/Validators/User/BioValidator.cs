@@ -8,6 +8,8 @@ public class BioValidator : AbstractValidator<string?>
     public BioValidator()
     {
         RuleFor(x => x)
+            .NotNull()
+            .NotEmpty()
             .MaximumLength(UserSettings.BioMaxLength);
     }
 }
