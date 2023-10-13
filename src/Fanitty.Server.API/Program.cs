@@ -7,6 +7,7 @@ using Fanitty.Server.API.Services;
 using Fanitty.Server.Application;
 using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Infrastructure;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddHttpContextAccessor();
 builder.AddFirebaseAuthentication();
 builder.Services.AddAuthorization();
 builder.Services.AddAppCors();
+builder.Services.AddSerilog();
 builder.AddLogger();
 
 var app = builder.Build();

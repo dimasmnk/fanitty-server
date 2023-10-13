@@ -1,5 +1,5 @@
-﻿using Fanitty.Server.API.Logging;
-using Microsoft.Extensions.Logging.Console;
+﻿using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace Fanitty.Server.API.Extensions.Logger;
 
@@ -7,10 +7,10 @@ public static class LoggerExtensions
 {
     public static WebApplicationBuilder AddLogger(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSingleton<ConsoleFormatter, CustomLogFormatter>();
-        builder.Logging.AddConsole(options =>
+        builder.Host.UseSerilog((ctx, lc) =>
         {
-            options.FormatterName = "CustomLogFormatter";
+            lc.WriteTo.Console(theme: AnsiConsoleTheme.Literate);
+            lc.ReadFrom.Configuration(ctx.Configuration);
         });
 
         return builder;
