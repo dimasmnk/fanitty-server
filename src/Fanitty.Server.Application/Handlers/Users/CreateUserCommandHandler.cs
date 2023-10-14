@@ -4,6 +4,7 @@ using Fanitty.Server.Application.Interfaces.Persistence;
 using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
 using Fanitty.Server.Core.Entities;
 using Fanitty.Server.Core.Settings;
+using Fanitty.Server.Core.ValueObjects;
 using MediatR;
 
 namespace Fanitty.Server.Application.Handlers.Users;
@@ -27,12 +28,18 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var uid = _currentUserService.Uid ?? throw new NullReferenceException($"Uid cannot be null.");
+        var uid = _currentUserService.GetUid();
         var email = await _firebaseService.GetUserEmailByUidAsync(uid);
         var username = request.IsGeneratedUsername
             ? _usernameGeneratorService.GenerateUsernameFromEmail(email, 4, UserSettings.UsernameMaxLength)
             : request.Username;
-        var user = new User(uid, username, email);
+        var user = new User
+        {
+            Uid = uid,
+            Username = username,
+            DisplayName = username,
+            Email = new Email { Value = email }
+        };
         _userRepository.Add(user);
         await _context.SaveChangesAsync(cancellationToken);
         await _firebaseService.SetUserIdClaimAsync(uid, user.Id);

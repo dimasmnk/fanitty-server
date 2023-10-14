@@ -51,4 +51,16 @@ public class CurrentUserService : ICurrentUserService
             return UserId.Value;
         }
     }
+
+    public string GetUid()
+    {
+        if (string.IsNullOrEmpty(Uid))
+        {
+            throw new NullReferenceException("Uid is not set in user claims.");
+        }
+        else
+        {
+            return Uid;
+        }
+    }
 }

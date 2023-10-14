@@ -24,12 +24,23 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
         var user = await _userRepository.GetUserByIdAsync(userId, cancellationToken);
 
         if (request.DisplayName is not null)
-            user.UpdateDisplayName(request.DisplayName);
+            user.DisplayName = request.DisplayName;
 
         if (request.Username is not null)
-            user.UpdateUsername(request.Username);
+        {
+            var isUsernameAvailable = await _userRepository.IsUsernameAvailableAsync(request.Username, cancellationToken);
+            if (isUsernameAvailable)
+            {
+                user.Username = request.Username;
+            }
+            else
+            {
+                throw new InvalidOperationException("Username already taken");
+            }
+        }
 
-        user.UpdateBio(request.Bio);
+        if (request.Bio is not null)
+            user.Bio = request.Bio;
 
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
