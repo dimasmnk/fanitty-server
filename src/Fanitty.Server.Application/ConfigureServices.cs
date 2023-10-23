@@ -1,6 +1,6 @@
 ﻿using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Application.PipelineBehaviors;
-using Fanitty.Server.Application.Services;
+using Fanitty.Server.Application.Services.UsernameGenerator;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,7 +1,6 @@
-﻿using AutoFixture.Xunit2;
-using Fanitty.Server.Application.Services;
+﻿using Fanitty.Server.Application.Services.UsernameGenerator;
+using Fanitty.Server.Core.Settings;
 using FluentAssertions;
-using System.Net.Mail;
 
 namespace Fanitty.Server.Application.UnitTests.Services;
 public class UsernameGeneratorServiceTests
@@ -13,20 +12,16 @@ public class UsernameGeneratorServiceTests
         _usernameGeneratorService = new UsernameGeneratorService();
     }
 
-    [Theory]
-    [AutoData]
-    public void GenerateUsernameFromEmail_ValidEmail_ShouldReturnGeneratedUsername(MailAddress mail)
+    [Fact]
+    public void GenerateUsername_NoInput_ShouldReturnGeneratedUsername()
     {
         // Arrange
-        var email = mail.Address;
-        var digitCount = 4;
-        var maxLength = 50;
+        var maxLength = UserSettings.UsernameMaxLength;
 
         // Act
-        var username = _usernameGeneratorService.GenerateUsernameFromEmail(email, digitCount, maxLength);
+        var username = _usernameGeneratorService.GenerateUsername();
 
         //Assert
-        var actualDigitCount = username.Length - mail.User.Length;
-        actualDigitCount.Should().Be(digitCount);
+        username.Length.Should().BeLessThan(maxLength);
     }
 }

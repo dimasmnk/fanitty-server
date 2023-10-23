@@ -3,7 +3,6 @@ using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Application.Interfaces.Persistence;
 using Fanitty.Server.Application.Interfaces.Persistence.IRepositories;
 using Fanitty.Server.Core.Entities;
-using Fanitty.Server.Core.Settings;
 using Fanitty.Server.Core.ValueObjects;
 using MediatR;
 
@@ -30,9 +29,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
         var uid = _currentUserService.GetUid();
         var email = await _firebaseService.GetUserEmailByUidAsync(uid);
-        var username = request.IsGeneratedUsername
-            ? _usernameGeneratorService.GenerateUsernameFromEmail(email, 4, UserSettings.UsernameMaxLength)
-            : request.Username;
+        var username = _usernameGeneratorService.GenerateUsername();
         var user = new User
         {
             Uid = uid,
