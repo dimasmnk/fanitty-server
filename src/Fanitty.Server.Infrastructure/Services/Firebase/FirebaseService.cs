@@ -35,7 +35,7 @@ public class FirebaseService : IFirebaseService
         await Auth.SetCustomUserClaimsAsync(uid, claims);
     }
 
-    public async Task<string> GetUserEmailByUidAsync(string uid)
+    public async Task<string> GetUserEmailByUid(string uid)
     {
         if (string.IsNullOrEmpty(uid))
         {

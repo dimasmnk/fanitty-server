@@ -1,4 +1,5 @@
-﻿using Fanitty.Server.Application.Commands.Users;
+﻿using Fanitty.Server.API.Extensions.Authorization;
+using Fanitty.Server.Application.Commands.Users;
 using Fanitty.Server.Application.Queries.Users;
 using MediatR;
 
@@ -8,11 +9,7 @@ public static class UserEndpoints
 {
     public static void MapUserEndpoints(this WebApplication app)
     {
-        var userEndpoints = app.MapGroup("/users").RequireAuthorization();
-
-        userEndpoints.MapPost("/",
-            async (CreateUserCommand command, IMediator mediator, CancellationToken cancellationToken)
-            => await mediator.Send(command, cancellationToken));
+        var userEndpoints = app.MapGroup("/users").RequireAuthorization(AuthConstants.CreatedUserPolicy);
 
         userEndpoints.MapPut("/",
             async (UpdateUserCommand command, IMediator mediator, CancellationToken cancellationToken)

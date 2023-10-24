@@ -28,7 +28,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var uid = _currentUserService.GetUid();
-        var email = await _firebaseService.GetUserEmailByUidAsync(uid);
+        var email = await _firebaseService.GetUserEmailByUid(uid);
         var username = _usernameGeneratorService.GenerateUsername();
         var user = new User
         {

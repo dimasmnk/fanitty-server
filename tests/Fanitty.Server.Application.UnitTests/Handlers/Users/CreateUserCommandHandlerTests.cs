@@ -43,7 +43,7 @@ public class CreateUserCommandHandlerTests
         var request = new CreateUserCommand();
 
         _currentUserService.GetUid().Returns(_uid);
-        _firebaseService.GetUserEmailByUidAsync(_uid).Returns(_email);
+        _firebaseService.GetUserEmailByUid(_uid).Returns(_email);
         _usernameGeneratorService.GenerateUsername().Returns(_generatedUsername);
 
         // Act
