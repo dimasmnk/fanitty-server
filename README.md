@@ -1,4 +1,2 @@
 # Fanitty.Server
-<p align="center">
-  <img alt="Tests" src="${{ steps.generate-badge.outputs.tests_badge }}" />
-</p>
+[![.NET](https://github.com/DmytroSemenko/Fanitty.Server/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/DmytroSemenko/Fanitty.Server/actions/workflows/dotnet.yml)
