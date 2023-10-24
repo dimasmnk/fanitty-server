@@ -21,17 +21,3 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
-
-      - name: Generate Badge
-        run: |
-          status=$(echo ${{ job.status }} | tr '[:upper:]' '[:lower:]')
-          if [ "$status" = "success" ]; then
-            badge_status="passing"
-            color="brightgreen"
-          else
-            badge_status="failing"
-            color="red"
-          fi
-          echo "<img alt=\"Tests\" src=\"https://img.shields.io/badge/tests-$badge_status-$color\" />"
-        id: generate-badge
-
