@@ -32,5 +32,6 @@ jobs:
             badge_status="failing"
             color="red"
           fi
-          echo "![Tests](https://img.shields.io/badge/tests-$badge_status-$color)"
+          echo "<img alt=\"Tests\" src=\"https://img.shields.io/badge/tests-$badge_status-$color\" />"
         id: generate-badge
+
