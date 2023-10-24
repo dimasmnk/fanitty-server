@@ -1,5 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 using Fanitty.Server.Application.Commands.Users;
+using Fanitty.Server.Application.UnitTests.Extensions;
 using Fanitty.Server.Application.Validators.Users;
 using Fanitty.Server.Core.Settings;
 using FluentAssertions;
@@ -19,9 +20,9 @@ public class UpdateUserCommandValidatorTests
     public void Validate_AllPropertiesSetValidValues_ShouldReturnTrue(string username, string displayName, string bio)
     {
         // Arrange
-        username = username.Substring(0, Math.Min(username.Length, UserSettings.UsernameMaxLength));
-        displayName = displayName.Substring(0, Math.Min(displayName.Length, UserSettings.DisplayNameMaxLength));
-        bio = bio.Substring(0, Math.Min(bio.Length, UserSettings.BioMaxLength));
+        username = username.TrimToMaxLenght(UserSettings.UsernameMinLength);
+        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
+        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -43,8 +44,8 @@ public class UpdateUserCommandValidatorTests
     {
         // Arrange
         var username = new string('a', UserSettings.UsernameMaxLength + 1);
-        displayName = displayName.Substring(0, Math.Min(displayName.Length, UserSettings.DisplayNameMaxLength));
-        bio = bio.Substring(0, Math.Min(bio.Length, UserSettings.BioMaxLength));
+        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
+        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -65,9 +66,9 @@ public class UpdateUserCommandValidatorTests
     public void Validate_InvalidDisplayName_ShouldReturnFalse(string username, string bio)
     {
         // Arrange
-        username = username.Substring(0, Math.Min(username.Length, UserSettings.UsernameMaxLength));
+        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
         var displayName = new string('a', UserSettings.DisplayNameMaxLength + 1);
-        bio = bio.Substring(0, Math.Min(bio.Length, UserSettings.BioMaxLength));
+        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -88,8 +89,8 @@ public class UpdateUserCommandValidatorTests
     public void Validate_InvalidBio_ShouldReturnFalse(string username, string displayName)
     {
         // Arrange
-        username = username.Substring(0, Math.Min(username.Length, UserSettings.UsernameMaxLength));
-        displayName = displayName.Substring(0, Math.Min(displayName.Length, UserSettings.DisplayNameMaxLength));
+        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
+        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
         var bio = new string('a', UserSettings.BioMaxLength + 1);
 
         var request = new UpdateUserCommand

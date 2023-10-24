@@ -1,23 +1,28 @@
-﻿using Fanitty.Server.API.IntegrationTests.Base;
+﻿using AutoFixture.Xunit2;
+using Fanitty.Server.API.IntegrationTests.Base;
+using Fanitty.Server.API.IntegrationTests.Extensions;
 using Fanitty.Server.Application.Responses.Usernames;
 using Fanitty.Server.Core.Entities;
+using Fanitty.Server.Core.Settings;
 using Fanitty.Server.Core.ValueObjects;
 using Fanitty.Server.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 
 namespace Fanitty.Server.API.IntegrationTests.Endpoints;
+
 public class UsernameEndpointsTests : UserAuthenticatedBase
 {
     public UsernameEndpointsTests()
     {
     }
 
-    [Fact]
-    public async Task Username_UsernameIsAvailable_ShouldReturnTrue()
+    [Theory]
+    [AutoData]
+    public async Task Username_UsernameIsAvailable_ShouldReturnTrue(string username)
     {
         // Arrange
-        var username = "aasdfsdf";
+        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
 
         // Act
         var response = await httpClient.GetAsync($"usernames/check/{username}");
@@ -28,11 +33,12 @@ public class UsernameEndpointsTests : UserAuthenticatedBase
         Assert.True(data?.IsAvailable);
     }
 
-    [Fact]
-    public async Task Username_UsernameIsTaken_ShouldReturnFalse()
+    [Theory]
+    [AutoData]
+    public async Task Username_UsernameIsTaken_ShouldReturnFalse(string username)
     {
         // Arrange
-        var username = "aasdfsdf";
+        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
         using var scope = webApplicationFactory.Services.CreateScope();
         var scopedServices = scope.ServiceProvider;
         var dbContext = scopedServices.GetRequiredService<FanittyDbContext>();
