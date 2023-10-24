@@ -20,9 +20,9 @@ public class UpdateUserCommandValidatorTests
     public void Validate_AllPropertiesSetValidValues_ShouldReturnTrue(string username, string displayName, string bio)
     {
         // Arrange
-        username = username.TrimToMaxLenght(UserSettings.UsernameMinLength);
-        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
-        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
+        username = username.TrimToMaxLength(UserSettings.UsernameMinLength);
+        displayName = displayName.TrimToMaxLength(UserSettings.DisplayNameMaxLength);
+        bio = bio.TrimToMaxLength(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -44,8 +44,8 @@ public class UpdateUserCommandValidatorTests
     {
         // Arrange
         var username = new string('a', UserSettings.UsernameMaxLength + 1);
-        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
-        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
+        displayName = displayName.TrimToMaxLength(UserSettings.DisplayNameMaxLength);
+        bio = bio.TrimToMaxLength(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -66,9 +66,9 @@ public class UpdateUserCommandValidatorTests
     public void Validate_InvalidDisplayName_ShouldReturnFalse(string username, string bio)
     {
         // Arrange
-        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
+        username = username.TrimToMaxLength(UserSettings.UsernameMaxLength);
         var displayName = new string('a', UserSettings.DisplayNameMaxLength + 1);
-        bio = bio.TrimToMaxLenght(UserSettings.BioMaxLength);
+        bio = bio.TrimToMaxLength(UserSettings.BioMaxLength);
 
         var request = new UpdateUserCommand
         {
@@ -89,8 +89,8 @@ public class UpdateUserCommandValidatorTests
     public void Validate_InvalidBio_ShouldReturnFalse(string username, string displayName)
     {
         // Arrange
-        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
-        displayName = displayName.TrimToMaxLenght(UserSettings.DisplayNameMaxLength);
+        username = username.TrimToMaxLength(UserSettings.UsernameMaxLength);
+        displayName = displayName.TrimToMaxLength(UserSettings.DisplayNameMaxLength);
         var bio = new string('a', UserSettings.BioMaxLength + 1);
 
         var request = new UpdateUserCommand

@@ -13,16 +13,12 @@ namespace Fanitty.Server.API.IntegrationTests.Endpoints;
 
 public class UsernameEndpointsTests : UserAuthenticatedBase
 {
-    public UsernameEndpointsTests()
-    {
-    }
-
     [Theory]
     [AutoData]
-    public async Task Username_UsernameIsAvailable_ShouldReturnTrue(string username)
+    public async Task Get_UsernameIsAvailable_ShouldReturnTrue(string username)
     {
         // Arrange
-        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
+        username = username.TrimToMaxLength(UserSettings.UsernameMaxLength);
 
         // Act
         var response = await httpClient.GetAsync($"usernames/check/{username}");
@@ -35,10 +31,10 @@ public class UsernameEndpointsTests : UserAuthenticatedBase
 
     [Theory]
     [AutoData]
-    public async Task Username_UsernameIsTaken_ShouldReturnFalse(string username)
+    public async Task Get_UsernameIsTaken_ShouldReturnFalse(string username)
     {
         // Arrange
-        username = username.TrimToMaxLenght(UserSettings.UsernameMaxLength);
+        username = username.TrimToMaxLength(UserSettings.UsernameMaxLength);
         using var scope = webApplicationFactory.Services.CreateScope();
         var scopedServices = scope.ServiceProvider;
         var dbContext = scopedServices.GetRequiredService<FanittyDbContext>();

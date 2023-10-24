@@ -1,4 +1,4 @@
-using Fanitty.Server.API.Endpoints;
+using Fanitty.Server.API.Extensions;
 using Fanitty.Server.API.Extensions.Authentication;
 using Fanitty.Server.API.Extensions.Authorization;
 using Fanitty.Server.API.Extensions.Cors;
@@ -34,8 +34,7 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapUserEndpoints();
-        app.MapUsernameEndpoints();
+        app.MapAllEndpoints();
 
         app.Run();
     }

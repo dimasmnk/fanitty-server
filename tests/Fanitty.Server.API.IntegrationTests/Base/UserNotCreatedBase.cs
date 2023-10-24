@@ -12,8 +12,8 @@ public class UserNotCreatedBase
     public UserNotCreatedBase()
     {
         webApplicationFactory = new TestWebApplicationFactory<Program>(Guid.NewGuid().ToString());
-        httpClient = new HttpClientFactory(webApplicationFactory).CreateAuthenticatedWithoutUserHttpClient();
+        httpClient = webApplicationFactory.CreateClient();
         httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, TokenGenerator.GenerateToken());
+            new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, TokenGenerator.GenerateTokenWithoutUserId());
     }
 }

@@ -10,7 +10,7 @@ public static class UserAuthEndpoints
         var userEndpoints = app.MapGroup("/users").RequireAuthorization();
 
         userEndpoints.MapPost("/",
-            async (CreateUserCommand command, IMediator mediator, CancellationToken cancellationToken)
-            => await mediator.Send(command, cancellationToken));
+            async (IMediator mediator, CancellationToken cancellationToken)
+            => await mediator.Send(new CreateUserCommand(), cancellationToken));
     }
 }
