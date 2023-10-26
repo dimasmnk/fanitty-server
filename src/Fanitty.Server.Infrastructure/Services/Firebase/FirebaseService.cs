@@ -3,6 +3,7 @@ using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.Extensions.Configuration;
+using System.Text;
 
 namespace Fanitty.Server.Infrastructure.Services.Firebase;
 
@@ -13,10 +14,12 @@ public class FirebaseService : IFirebaseService
 
     public FirebaseService(IConfiguration configuration)
     {
-        var path = configuration.GetValue<string>("Firebase:CredentialsFilePath");
+        var base64 = configuration.GetValue<string>("Firebase")!;
+        var blob = Convert.FromBase64String(base64);
+        var json = Encoding.UTF8.GetString(blob);
         App = FirebaseApp.Create(new AppOptions()
         {
-            Credential = GoogleCredential.FromFile(path)
+            Credential = GoogleCredential.FromJson(json)
         });
 
         Auth = FirebaseAuth.DefaultInstance;

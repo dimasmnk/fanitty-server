@@ -15,7 +15,7 @@ public static class ConfigureServices
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<FanittyDbContext>(options =>
-        options.UseNpgsql(configuration.GetConnectionString("FanittyDb"),
+        options.UseNpgsql(configuration.GetValue<string>("Database"),
         builder => builder.MigrationsAssembly(typeof(FanittyDbContext).Assembly.FullName)));
 
         services.AddScoped<IFanittyDbContext>(provider => provider.GetRequiredService<FanittyDbContext>());
