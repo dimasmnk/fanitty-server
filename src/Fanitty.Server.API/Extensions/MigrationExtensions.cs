@@ -9,7 +9,10 @@ public static class MigrationExtensions
     {
         using var scope = app.Services.CreateScope();
         using var db = scope.ServiceProvider.GetService<FanittyDbContext>()!;
-        db.Database.Migrate();
+        if (db.Database.IsRelational())
+        {
+            db.Database.Migrate();
+        }
         return app;
     }
 }
