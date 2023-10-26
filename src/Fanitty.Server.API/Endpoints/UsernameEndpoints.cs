@@ -1,4 +1,4 @@
-﻿using Fanitty.Server.API.Extensions.Authorization;
+﻿using Fanitty.Server.API.Extensions;
 using Fanitty.Server.Application.Queries.Usernames;
 using MediatR;
 

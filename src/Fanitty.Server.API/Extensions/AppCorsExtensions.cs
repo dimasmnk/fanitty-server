@@ -1,4 +1,4 @@
-﻿namespace Fanitty.Server.API.Extensions.Cors;
+﻿namespace Fanitty.Server.API.Extensions;
 
 public static class AppCorsExtensions
 {

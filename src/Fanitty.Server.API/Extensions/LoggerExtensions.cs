@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 
-namespace Fanitty.Server.API.Extensions.Logger;
+namespace Fanitty.Server.API.Extensions;
 
 public static class LoggerExtensions
 {

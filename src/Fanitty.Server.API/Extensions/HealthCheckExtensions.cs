@@ -1,4 +1,6 @@
-﻿namespace Fanitty.Server.API.Extensions.HealthChecks;
+﻿using Fanitty.Server.API.Extensions;
+
+namespace Fanitty.Server.API.Extensions;
 
 public static class HealthCheckExtensions
 {

@@ -1,7 +1,7 @@
 ﻿using Fanitty.Server.Infrastructure.Services.Firebase;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace Fanitty.Server.API.Extensions.Authentication;
+namespace Fanitty.Server.API.Extensions;
 
 public static class FirebaseAuthenticationExtensions
 {

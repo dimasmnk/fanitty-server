@@ -1,6 +1,6 @@
 ﻿using Fanitty.Server.Infrastructure.Services.Firebase;
 
-namespace Fanitty.Server.API.Extensions.Authorization;
+namespace Fanitty.Server.API.Extensions;
 
 public static class AuthorizationExtensions
 {
