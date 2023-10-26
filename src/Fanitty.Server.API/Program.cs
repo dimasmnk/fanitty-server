@@ -6,30 +6,38 @@ using Fanitty.Server.Application.Interfaces;
 using Fanitty.Server.Infrastructure;
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace Fanitty.Server.API;
 
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
-builder.Services.AddHttpContextAccessor();
-builder.AddFirebaseAuthentication();
-builder.AddConfiguredAuthorization();
-builder.AddHealthChecks();
-builder.Services.AddAppCors();
-builder.Services.AddSerilog();
-builder.AddLogger();
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+        builder.Services.AddApplicationServices();
+        builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
+        builder.Services.AddHttpContextAccessor();
+        builder.AddFirebaseAuthentication();
+        builder.AddConfiguredAuthorization();
+        builder.AddHealthChecks();
+        builder.Services.AddAppCors();
+        builder.Services.AddSerilog();
+        builder.AddLogger();
 
-app.ApplyMigrations();
+        var app = builder.Build();
 
-app.UserAppCors();
-app.UseMiddleware<UnhandledExceptionMiddleware>();
-app.UseMiddleware<LoggingMiddleware>();
-app.UseAuthentication();
-app.UseAuthorization();
+        app.ApplyMigrations();
 
-app.MapHealthChecks("/health");
-app.MapAllEndpoints();
+        app.UserAppCors();
+        app.UseMiddleware<UnhandledExceptionMiddleware>();
+        app.UseMiddleware<LoggingMiddleware>();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
-app.Run();
+        app.MapHealthChecks("/health");
+        app.MapAllEndpoints();
+
+        app.Run();
+    }
+}
