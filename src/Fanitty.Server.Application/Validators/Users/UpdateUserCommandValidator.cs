@@ -9,14 +9,14 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
     {
         RuleFor(x => x.Username)
             .Username()
-            .When(x => x.Username is not null);
+            .When(x => !string.IsNullOrEmpty(x.Username));
 
         RuleFor(x => x.DisplayName)
             .DisplayName()
-            .When(x => x.Username is not null);
+            .When(x => !string.IsNullOrEmpty(x.DisplayName));
 
         RuleFor(x => x.Bio)
             .Bio()
-            .When(x => x.Bio is not null);
+            .When(x => !string.IsNullOrEmpty(x.Bio));
     }
 }

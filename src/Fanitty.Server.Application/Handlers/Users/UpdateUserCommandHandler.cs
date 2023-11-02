@@ -23,10 +23,10 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
         var userId = _currentUserService.GetUserId();
         var user = await _userRepository.GetUserByIdAsync(userId, cancellationToken);
 
-        if (request.DisplayName is not null)
+        if (!string.IsNullOrEmpty(request.DisplayName))
             user.DisplayName = request.DisplayName;
 
-        if (request.Username is not null)
+        if (!string.IsNullOrEmpty(request.Username))
         {
             var isUsernameAvailable = await _userRepository.IsUsernameAvailableAsync(request.Username, cancellationToken);
             if (isUsernameAvailable)
@@ -39,7 +39,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
             }
         }
 
-        if (request.Bio is not null)
+        if (!string.IsNullOrEmpty(request.Bio))
             user.Bio = request.Bio;
 
         await _dbContext.SaveChangesAsync(cancellationToken);
