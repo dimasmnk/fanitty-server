@@ -1,0 +1,22 @@
+<div *ngIf="authService.isLoggedIn">
+    <app-navbar />
+</div>
+<div *ngIf="!authService.isLoggedIn">
+    <app-navbar-noauth />
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="visible md:invisible fixed z-50 w-full bottom-0">
+    <ul class="flex items-center justify-center menu-horizontal bg-base-200 mt-6 w-full">
+        <li class="flex-auto">
+            <button class="btn w-full">A</button>
+        </li>
+        <li class="flex-auto">
+            <button class="btn w-full">B</button>
+        </li>
+        <li class="flex-auto">
+            <button class="btn w-full">C</button>
+        </li>
+      </ul>
+</div>

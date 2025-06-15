@@ -1,0 +1,49 @@
+<div class="grid place-content-center">
+    <div class="card w-96 bg-black outline outline-1 outline-gray-800 mt-10">
+        <div class="card-body">
+            <h2 class="card-title"><button class="btn btn-ghost btn-circle"
+                    [routerLink]="['/profile', userData?.username]" routerLinkActive="router-link-active"><fa-icon
+                        [icon]="faArrowLeft" /></button> Редагування профілю</h2>
+            <form [formGroup]="editProfileForm" class="w-full space-y-3" (ngSubmit)="save()">
+                <div>
+                    <div>Унікальне ім'я користовача:</div>
+                    <input type="text" [placeholder]="userData?.username"
+                        class="input input-bordered w-full max-w-xs" formControlName="username" [ngClass]="username?.touched && !username?.pending && username?.value ? username?.invalid ? 'input-error' : 'input-success' : ''"/>
+                        <progress *ngIf="username?.touched && username?.pending" class="progress h-px w-full mt-0"></progress>
+                        <div *ngIf="username?.invalid && username?.touched">
+                            <div class="label-text-alt" *ngIf="username?.errors?.['minlength']">Мінімальна довжина 5 символів.</div>
+                            <div class="label-text-alt" *ngIf="username?.errors?.['maxlength']">Максимальна довжина 40 символів.</div>
+                            <div class="label-text-alt" *ngIf="username?.errors?.['pattern']">Тільки латинські літери та цифри та спец символи "-" "_" ".".</div>
+                            <div class="label-text-alt" *ngIf="username?.errors?.['usernameTaken']">Ім'я вже зайняте.</div>
+                        </div>
+                </div>
+                <div>
+                    <div>Ім'я користовача:</div>
+                    <input type="text" [placeholder]="userData?.displayName"
+                        class="input input-bordered w-full max-w-xs" formControlName="displayName" [ngClass]="displayName?.touched && !displayName?.pending && displayName?.value ? displayName?.invalid ? 'input-error' : 'input-success' : ''"/>
+                        <div *ngIf="displayName?.invalid && displayName?.touched">
+                            <div class="label-text-alt" *ngIf="displayName?.errors?.['maxlength']">Максимальна довжина 50 символів.</div>
+                        </div>
+                </div>
+                <div>
+                    <div>Біо:</div>
+                    <textarea class="textarea textarea-bordered w-full max-h-48"
+                        [placeholder]="userData?.bio ?? 'Біо...'" formControlName="bio" [ngClass]="bio?.touched && !bio?.pending && bio?.value ? bio?.invalid ? 'textarea-error' : 'textarea-success' : ''"></textarea>
+                        <div *ngIf="bio?.invalid && bio?.touched">
+                            <div class="label-text-alt" *ngIf="bio?.errors?.['maxlength']">Максимальна довжина 255 символа.</div>
+                        </div>
+                </div>
+                <div class="card-actions grid place-items-center mt-3">
+                    <button *ngIf="!isSaved" class="btn btn-wide btn-success" type="submit" [disabled]="!editProfileForm.valid">
+                        <div *ngIf="!isSaved && !isLoading">Зберегти</div>
+                        <div *ngIf="isLoading" class="loading"></div>
+                    </button>
+                    <button *ngIf="isSaved" class="btn btn-wide btn-success" disabled="true">
+                        <div *ngIf="isGoodResult && isSaved">Збережено</div>
+                        <div *ngIf="!isGoodResult && isSaved">Помилка</div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

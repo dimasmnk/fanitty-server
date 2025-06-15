@@ -1,0 +1,33 @@
+<div class="navbar outline outline-1 outline-gray-800">
+    <div class="navbar-start">
+        <a class="btn btn-ghost rounded-full hover:shadow-sm hover:shadow-primary normal-case text-xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" routerLink="/">FANITTY</a>
+    </div>
+    <div class="navbar-center">
+        <div class="join">
+            <input type="text" placeholder="Пошук…" class="input input-bordered rounded-full join-item" />
+            <button class="btn bg-black border-gray-700 hover:border-gray-700 hover:bg-zinc-950 rounded-full join-item">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
+          </div>
+    </div>
+    <div class="navbar-end">
+        <div class="form-control invisible md:visible">
+          </div>
+        <div class="dropdown dropdown-end">
+            <label *ngIf="userData?.username" tabindex="0" class="btn bg-black border-gray-700 hover:border-gray-700 hover:bg-zinc-950 btn-circle avatar mr-5">
+                <div class="w-10 rounded-full">
+                    <span class="text-3xl animate-fadeIn">{{userData?.username?.[0]}}</span>
+                </div>
+            </label>
+            <label *ngIf="!userData?.username" tabindex="0" class="btn bg-slate-700 animate-pulse border-gray-700 hover:border-gray-700 btn-circle avatar mr-5">
+                <span class="text-3xl animate-fadeIn"></span>
+            </label>
+            <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 outline outline-1 outline-gray-700 rounded-box w-52">
+                <li *ngIf="!userData?.username"><div class="w-full bg-slate-700 rounded animate-pulse" role="button">@</div></li>
+                <li *ngIf="userData?.username"><a class="w-full font-bold text-base animate-fadeIn" role="button" [routerLink]="['/profile', userData?.username]">@{{userData?.username}}</a></li>
+                <div class="divider m-0"></div>
+                <li><a class="w-full font-bold text-base" role="button" (click)="authService.userSignOut()">Вийти</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

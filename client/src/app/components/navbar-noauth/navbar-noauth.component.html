@@ -1,0 +1,6 @@
+<div class="navbar bg-base-200 outline outline-1 outline-gray-800">
+    <div class="flex-1">
+        <a class="btn btn-ghost rounded-full hover:shadow-sm hover:shadow-primary normal-case text-xl bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" routerLink="/">{{ title }}</a>
+    </div>
+    <button class="btn bg-black border-gray-700 hover:border-gray-700 hover:bg-zinc-950 rounded-full" (click)="auth.userSignInWithGoogle()"><fa-icon [icon]="faGoogle" />Увійти за допомогою Google</button>
+</div>

@@ -1,0 +1,89 @@
+<div class="w-full flex h-40">
+    <div class="flex-auto w-2/12 grid place-items-center">
+        <div class="avatar placeholder">
+            <div class="outline outline-1 outline-gray-800 text-neutral-content rounded-full w-36">
+                <span class="text-5xl font-bold">{{username[0].toUpperCase()}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="flex-auto w-4/12 prose grid grid-cols-1 content-center">
+        <h2 *ngIf="!user?.displayName" class="mt-0 mb-0 bg-gray-600 rounded w-56 h-8 animate-pulse"></h2>
+        <h2 *ngIf="user?.displayName" class="mt-0 mb-0 animate-fadeIn">{{user?.displayName}}</h2>
+        <p class="mt-0 mb-0 animate-fadeIn">@{{username}}</p>
+        <p class="mt-0 mb-0 animate-fadeIn">534 📃 • 355K 🫂 • 3.2M 🩷</p>
+        <p class="mt-0 mb-0 animate-fadeIn">{{truncateString(user?.bio ?? 'BIO')}} <button class="btn-circle btn-ghost btn-sm">></button></p>
+    </div>
+    <span class="flex-auto w-3/12 gap">
+    </span>
+    <span class="flex-auto w-1/12 grid grid-cols-1 content-center gap-2">
+        <a href="instagram.com">🔗 Instagram</a>
+        <a href="telegram.org">🔗 Telegram</a>
+        <a href="tiktok.com">🔗 Tiktok</a>
+    </span>
+    <span class="flex-auto w-2/12 grid place-items-center content-center gap-2">
+        <span *ngIf="isButtonLoading" class="loading loading-spinner loading-lg"></span>
+        <button *ngIf="!isCurrentUser && !isButtonLoading" class="btn bg-black border-gray-700 hover:border-gray-700 hover:bg-zinc-950 rounded-full">Підписатись</button>
+        <button *ngIf="!isCurrentUser && !isButtonLoading" class="btn rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:border-gray-300">Стати фаном</button>
+        <button *ngIf="isCurrentUser && !isButtonLoading" class="btn bg-black border-gray-700 hover:border-gray-700 hover:bg-zinc-950 rounded-full" [routerLink]="['/profile-editor']">Редагувати профіль</button>
+    </span>
+</div>
+<ul class="menu gap-2 lg:menu-horizontal w-full justify-center">
+    <li>
+        <a class="active">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Пости
+            <span class="badge badge-sm">99+</span>
+        </a>
+    </li>
+    <li>
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Світлини
+        </a>
+    </li>
+    <li>
+        <a>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Опис
+        </a>
+    </li>
+</ul>
+
+<div class="mt-5 grid grid-cols-1 gap-4 place-items-center grid-paper">
+    <div class="card max-w-4xl outline outline-1 bg-base-100 outline-gray-800">
+        <figure><img
+                src="https://www.indiewire.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-14-at-9.02.14-AM.png?w=1677&h=1060&crop=1"
+                alt="Shoes" /></figure>
+        <div class="card-body">
+            <h2 class="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">Buy Now</button>
+            </div>
+        </div>
+    </div>
+    <div class="card max-w-4xl outline outline-1 bg-base-100 outline-gray-800">
+        <figure><img
+                src="https://www.indiewire.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-14-at-9.02.14-AM.png?w=1677&h=1060&crop=1"
+                alt="Shoes" /></figure>
+        <div class="card-body">
+            <h2 class="card-title">Shoes!</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">Buy Now</button>
+            </div>
+        </div>
+    </div>
+</div>
